@@ -1,4 +1,4 @@
-#Democracy
+# Democracy
 
 It is an Online Voting Portal.
 It can be used for taking the reviews of common people.
