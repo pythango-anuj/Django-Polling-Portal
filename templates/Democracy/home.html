@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DEMOCRACY</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %} ">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %} ">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.2.0/ekko-lightbox.css" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %} ">
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container">
+      <img src="/static/img/demo.jpg" class="img-rounded" alt="JAI HO"  height=60 width=60 >
+    &emsp;&emsp;
+      <h2><a href="/static/index.html" class="navbar-brand">Democracy</a></h2>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navNavbar"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a href="{% url 'Home' %}" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'About'%}" class="nav-link">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'Services' %}" class="nav-link">Services</a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a href=" {% url 'Signin' %} " class="nav-link">&nbsp;&nbsp;&nbsp;&nbsp;Sign IN</a>
+              <p><font color="white">(Already a User?)&nbsp;&nbsp;</font></p>
+          </li>
+          <li class="nav-item">
+            <a href=" {% url 'Signup' %} " class="nav-link">Sign UP</a>
+            <p><font color="white">(New User?)</font></p>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a href="{% url 'Blog' %}" class="nav-link">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'Contact' %}" class="nav-link">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SHOWCASE SLIDER -->
+  <section id="showcase">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item carousel-image-1 active">
+          <div class="container">
+            <div class="carousel-caption d-none d-sm-block text-right mb-5">
+              <h1 class="display-3">Raise Your Voice</h1>
+              <p class="lead"></p>
+              <a href="{% url 'Voting' %}" class="btn btn-danger btn-lg">Vote Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item carousel-image-2">
+          <div class="container">
+            <div class="carousel-caption d-none d-sm-block  text-left mb-5">
+              <h2 class="display-3"><a class="text-light"style="text-decoration:none;" href="">Citizenship Amendment Act (CAA)</a></h2>
+              <p class="lead">The Citizenship (Amendment) Act, 2019 was passed
+                 by the Parliament of India on 11 December 2019.
+                 It amended the Citizenship Act of 1955 by providing a path to
+                  Indian citizenship for members of Hindu, ...<a href="https://en.wikipedia.org/wiki/Citizenship_Amendment_Act_protests">more</a></p>
+              <a href="{% url 'Voting' %}" class="btn btn-success btn-lg">Vote Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item carousel-image-1">
+          <div class="container">
+            <div class="carousel-caption d-none d-sm-block text-right mb-5">
+              <h2 class="display-3"><a style="text-decoration:none;"href="" class="text-warning">National Register of Citizens (NRC)</a></h2>
+              <p class="lead">The National Register of Citizens is a registry
+                maintained by the Government of India containing names & certain
+                 relevant information for the identification of genuine Indian
+                  citizens in the state of Assam.The register was specifically made for Assam.
+                <a href="https://en.wikipedia.org/wiki/National_Register_of_Citizens">read more</a></p>
+              <a href="{% url 'Voting' %}" class="btn btn-success btn-lg">Vote Now</a>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <a href="#myCarousel" data-slide="prev" class="carousel-control-prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+
+      <a href="#myCarousel" data-slide="next" class="carousel-control-next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- HOME HEADING SECTION -->
+  <section id="home-heading" class="p-5">
+    <div class="dark-overlay">
+      <div class="row">
+        <div class="col">
+          <div class="container pt-5">
+            <h1>Are You Ready To Get Started?</h1>
+            <p class="d-none d-md-block">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptates, consequatur labore placeat doloremque dignissimos exercitationem esse fuga laborum ex!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer id="main-footer" class="text-center p-4">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <p>Copyright 2017 &copy; Democracy</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- VIDEO MODAL -->
+  <div class="modal fade" id="videoModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button class="close" data-dismiss="modal"><span>&times;</span></button>
+          <iframe src="" height="350" width="100%" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/popper.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.2.0/ekko-lightbox.js"></script>
+  <script src="/static/js/main.js"></script>
+</body>
+</html>

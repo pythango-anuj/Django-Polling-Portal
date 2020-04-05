@@ -1,0 +1,112 @@
+<html>
+<head>
+    <title>Voting pool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <style>
+#navbar{
+  padding: 30px;
+  background: black;
+
+}
+#container{
+  padding: 30px;
+  width:50%;
+  align:center;
+  margin-top: 50px;
+}
+footer#main-footer {
+  margin-top: 10%;
+  padding:20px;
+  height:60px;
+  background: #000;
+  color: #fff; }
+li{
+  float:left;
+  margin-left:50px;
+  list-style-type:none;
+  color:white;
+}
+#link1{
+  text-decoration: none;
+  font-family: tahoma;
+  color:white;
+}
+#link1 :hover{
+  color:grey;
+}
+#hdd2{
+  background: #383550;
+  color:orange;
+  padding:20px;
+}
+#container{
+  border:1px;
+}
+
+    </style>
+</head>
+<body>
+
+<div id="navbar">
+    <ul>
+        <li><a id="link1" href="#">MY PROFILE</a></li>
+        <li><a id="link1" href="home_page.php"> HOME</a></li>
+        <li><a id="link1" href="order.php">MY ORDERS</a></li>
+
+        <li><a id="link1" href="user_logout.php">LOGOUT</a></li>
+    </ul>
+</div>
+
+
+<div class="container bg-light text-danger" align="center" id="container">
+    <h2 id="voting" align=center class="bg-dark text-light">Vote Here</h2>
+    <form action="{% url 'response' %}" style="width:40%;" method="post">
+        {% csrf_token %}
+        <br>
+        <div class="dropdown">
+
+
+            <label for="select bill">Select BILL</label>
+            <select name="bills">
+                <option value="102">NRC</option>
+                <option value="103">CAA</option>
+                <option value="104"></option>
+                <option value="105"></option>
+                <option value="106"></option>
+                <option value="107"></option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <h4> choose your opinion </h4>
+            <label class="radio-inline"><input type="radio" name="opinion" value=true checked>In Support</label>
+            <label class="radio-inline"><input type="radio" name="opinion" value=false>Against</label>
+            <label class="radio-inline"><input type="radio" name="opinion" value=none>Can't say</label>
+        </div>
+        <div class="form-group">
+            <br>
+            <input type="textarea" class="form-control" id="textarea" placeholder="Please write something about your opinion" name="detail">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-warning">vote</button>
+            <p>{{message}}</p>
+        </div>
+    </form>
+</div>
+
+<footer id="main-footer" class="text-center p-4">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>Copyright 2019 &copy; DEMOCRACY</p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

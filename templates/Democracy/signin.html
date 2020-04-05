@@ -1,0 +1,29 @@
+{% load static %}
+<html>
+<head>
+<title>CustomerloginSignpage</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/loginstyle.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+<body background="/static/img/flag3.jpg">
+    <div class="loginbox">
+    <img src="/static/img/demo.jpg" class="avatar">
+        <h1>Login Here</h1>
+
+        <form method="post" action="{% url 'Login' %}">
+            {% csrf_token %}
+
+            <input id="text1" type="text" name="username" placeholder="Enter UID" required>
+
+            <input id="text1" type="password" name="password" placeholder="Enter Password" required>
+          <br> <p>{{message}}</p>
+            <br><br>
+            <input type="submit" name="submit" value="Login">
+
+            <p id="link2">Don't have an account?  <a id="link2" href="{% url 'Signup' %}">Sign UP</a></p>
+        </form>
+
+    </div>
+
+</body>
+</head>
+</html>
