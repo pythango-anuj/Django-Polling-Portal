@@ -1,9 +1,11 @@
-from django.shortcuts import render, HttpResponse, redirect,render_to_response
+from django.shortcuts import render, HttpResponse, redirect, render_to_response
 from .forms import customuserform
-from .models import Vote,Laws
+from .models import UserVote, Opinion, CodeVote, Custom_User_Model
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
+
+
 def home(request):
     return render(request, 'Democracy/home.html')
 
@@ -31,22 +33,9 @@ def blog(request):
 def contact(request):
     return render(request, 'Democracy/contact.html')
 
-
-def loginview(request):
-    cn=0
-    cy=0
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-            return redirect('Home')
-
-        else:
-            return HttpResponse("Sorry! Your account in Permanentaly Dishabled.")
-    else:
-        return render(request, 'Democracy/signin.html', {'message': 'Invalid Username or password'})
+@login_required
+def voting(request):
+    return render(request, 'Democracy/voting_portal.html')
 
 
 def registerview(request):
@@ -59,57 +48,95 @@ def registerview(request):
             return HttpResponse("!!Invalid Credential!!<br>"
                                 "your password can't be too similar to your other personal information.")
 
+
+def loginview(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            return redirect('Home')
+
+        else:
+            return HttpResponse("Sorry! Your account in Permanentaly Disabled.")
+    else:
+        return render(request, 'Democracy/signin.html', {'message': 'Invalid Username or password'})
+
+
+
 @login_required
 def logoutview(request):
-    if request.method =='POST':
+    if request.method == 'POST':
         logout(request)
         redirect('Home')
 
-def count(request):
-    if request.method == 'POST':
-        id = request.POST.get('id')
-        vote_objects = Vote.objects.get_or_create(id=id)
-        opinion = request.POST.get('opinion')
-        if opinion:
-            vote_objects.yes = vote_objects.yes + 1
-            vote_objects.save()
-
-@login_required
-def voting(request):
-    return render(request, 'Democracy/voting_portal.html')
-
 
 def save_response(request):
-    cy=0
-    cn=0
     if request.method == "POST":
-        law_code = request.POST['bills']
+        code_id = request.POST['bills']
+
         user_opinion = request.POST['opinion']
-        comment = request.POST['detail']
-        user = request.user
-        print(user_opinion, user)
+        comment = request.POST['comment']
+        check_list = Opinion.objects.filter(username=request.user)
 
-        created = Laws.objects.filter(user=user)
-        #law_obj = created.all().filter(law_code=law_code)
-        k=0
-        if len(created)!=0:
-            for obj in created:
-                if int(obj.law_code) == int(law_code):
-                    k = 1
+        flag = 0
+        if (len(check_list) != 0):
+            for obj in check_list:
+                if obj.code_id == code_id:
+                    flag = 1
                     break
-        if k==1:
-            return render(request, "Democracy/voting_portal.html", {"message":'you have already voted for this law'})
+        if flag == 1:
+            return render(request, 'Democracy/voting_portal.html',
+                          {'message': "Sorry!\nYou have already responded to this Law!"})
         else:
-            law_obj = Laws()
-            law_obj.law_code = law_code
-            law_obj.user = user
-            law_obj.save()
+            opinion = Opinion()
+            uservote = UserVote()
 
-            if user_opinion:
-                cy+=1
-            else:
-                cn+=1
-            return render(request, "Democracy/voting_portal.html", {'message':"your vote is recorded"})
+            opinion.username = request.user
+            uservote.username = request.user
+            opinion.code_id = code_id
 
-def fun():
-    pass
+            opinion.comment = comment
+
+            if (user_opinion == 'True'):
+                opinion.Yes = True
+                uservote.Yes = True
+
+            elif (user_opinion == 'False'):
+                opinion.No = True
+                uservote.No = True
+            elif (user_opinion == 'None'):
+                opinion.Do_Not_Know = True
+                uservote.Do_Not_Know = True
+            opinion.save()
+            uservote.code_id = Opinion.objects.filter(username=request.user).filter(code_id=code_id).get(
+                code_id=code_id)
+            uservote.save()
+            vote_count()
+            return render(request, 'Democracy/voting_portal.html', {'message': "Thanks for giving your response!"})
+
+def vote_count():
+    CodeVote.objects.all().delete()
+    sets=set()
+    bills=Opinion.objects.all()
+    for bill in bills:
+        sets.add(bill.code_id)
+    for item in sets:
+        codevote = CodeVote()
+        codevote.code_id = item
+        codevote.yes=0
+        codevote.no=0
+        codevote.do_not_know=0
+        vote_obj=Opinion.objects.filter(code_id=item)
+        for obj in vote_obj:
+            if(obj.Yes == True):
+                codevote.yes+=1
+            elif(obj.No == True):
+                codevote.no+=1
+            elif(obj.Do_Not_Know == True):
+                codevote.do_not_know+=1
+        codevote.save()
+
+
+

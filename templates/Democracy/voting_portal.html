@@ -73,8 +73,8 @@ li{
 
             <label for="select bill">Select BILL</label>
             <select name="bills">
-                <option value="102">NRC</option>
-                <option value="103">CAA</option>
+                <option value="NRC">National Register of Citizen(NRC)</option>
+                <option value="CAA">Citizenship Amendment Act(CAA)</option>
                 <option value="104"></option>
                 <option value="105"></option>
                 <option value="106"></option>
@@ -84,16 +84,16 @@ li{
         <br>
         <div>
             <h4> choose your opinion </h4>
-            <label class="radio-inline"><input type="radio" name="opinion" value=true checked>In Support</label>
-            <label class="radio-inline"><input type="radio" name="opinion" value=false>Against</label>
-            <label class="radio-inline"><input type="radio" name="opinion" value=none>Can't say</label>
+            <label class="radio-inline"><input type="radio" name="opinion" value=True checked>In Support</label>
+            <label class="radio-inline"><input type="radio" name="opinion" value=False>Against</label>
+            <label class="radio-inline"><input type="radio" name="opinion" value=None>Can't say</label>
         </div>
         <div class="form-group">
             <br>
-            <input type="textarea" class="form-control" id="textarea" placeholder="Please write something about your opinion" name="detail">
+            <input type="textarea" class="form-control" id="textarea" placeholder="Please write something about your opinion" name=comment>
         </div>
         <div>
-            <button type="submit" class="btn btn-warning">vote</button>
+            <button type="submit" class="btn btn-warning">Vote</button>
             <p>{{message}}</p>
         </div>
     </form>
