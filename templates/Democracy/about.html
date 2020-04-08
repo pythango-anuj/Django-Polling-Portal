@@ -15,22 +15,30 @@
 <body>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container">
-      <a href="{% url 'Index' %}" class="navbar-brand">Glozzom</a>
+      <a href="" class="navbar-brand">Democracy</a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navNavbar"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a href="{% url 'Index' %}" class="nav-link">Home</a>
-          </li>
+         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a href="{% url 'About' %}" class="nav-link">About Us</a>
+            <a href="{% url 'Home' %}" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="{% url 'Services' %}" class="nav-link">Services</a>
+            <a href="{% url 'About'%}" class="nav-link">About Us</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a href=" {% url 'Logout' %} " class="nav-link">Log Out</a>
+          </li>
+          {% else %}
+            <li class="nav-item">
+              <a href=" {% url 'Signin' %} " class="nav-link">&nbsp;&nbsp;&nbsp;&nbsp;Sign IN</a>
+              <p><font color="white">(Already a User?)&nbsp;&nbsp;</font></p>
           </li>
           <li class="nav-item">
-            <a href="{% url 'Blog' %}" class="nav-link">Blog</a>
+            <a href=" {% url 'Signup' %} " class="nav-link">Sign UP</a>
+            <p><font color="white">(New User?)</font></p>
           </li>
+          {% endif %}
           <li class="nav-item">
             <a href="{% url 'Contact' %}" class="nav-link">Contact</a>
           </li>
@@ -44,7 +52,7 @@
       <div class="row">
         <div class="col-md-6 m-auto text-center">
           <h1>About Us</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, saepe.</p>
+          <p>We are the Voice of the common people of a Democratic Country.</p>
         </div>
       </div>
     </div>
@@ -56,8 +64,8 @@
       <div class="row">
         <div class="col-md-6">
           <h1>What We Do</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum sequi necessitatibus deleniti accusamus provident dignissimos numquam fuga nulla quia voluptatibus, dolore voluptate excepturi accusantium dolores temporibus fugit, voluptas velit omnis!</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum sequi necessitatibus deleniti accusamus provident dignissimos numquam fuga nulla quia voluptatibus, dolore voluptate excepturi accusantium dolores temporibus fugit, voluptas velit omnis!</p>
+          <p>We generally take the reviews of the common people for every big decisions taken by our government through this portal website and in this way we can easily get the review of whole country.</p>
+          <p> On this portal user have to vote for every decisions and select one of three choices provided. He has to enter his Aadhar UID as a username. One user can vote only once for each law.</p>
         </div>
         <div class="col-md-6">
           <img src="http://lorempixel.com/400/400/business/8" alt="" class="about-img img-fluid rounded-circle d-none d-md-block">
@@ -74,8 +82,8 @@
           <div class="card bg-danger text-center text-white">
             <div class="card-body">
               <i class="fa fa-building"></i>
-              <h3>Lorem ipsum</h3>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, architecto.
+              <h3>Democracy</h3>
+              Raise your voice. Your are indifferent part of the country.
             </div>
           </div>
         </div>
@@ -83,8 +91,8 @@
           <div class="card bg-danger text-center text-white">
             <div class="card-body">
               <i class="fa fa-bullhorn"></i>
-              <h3>Lorem ipsum</h3>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, architecto.
+              <h3>Democracy</h3>
+              Raise your voice. Your are indifferent part of the country.
             </div>
           </div>
         </div>
@@ -92,8 +100,8 @@
           <div class="card bg-danger text-center text-white">
             <div class="card-body">
               <i class="fa fa-comments"></i>
-              <h3>Lorem ipsum</h3>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, architecto.
+              <h3>Democracy</h3>
+              Raise your voice. Your are indifferent part of the country.
             </div>
           </div>
         </div>
@@ -104,8 +112,8 @@
           <div class="card bg-danger text-center text-white">
             <div class="card-body">
               <i class="fa fa-clock-o"></i>
-              <h3>Lorem ipsum</h3>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, architecto.
+              <h3>Democracy</h3>
+              Raise your voice. Your are indifferent part of the country.
             </div>
           </div>
         </div>
@@ -113,8 +121,8 @@
           <div class="card bg-danger text-center text-white">
             <div class="card-body">
               <i class="fa fa-cc"></i>
-              <h3>Lorem ipsum</h3>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, architecto.
+              <h3>Democracy</h3>
+              Raise your voice. Your are indifferent part of the country.
             </div>
           </div>
         </div>
@@ -122,8 +130,8 @@
           <div class="card bg-danger text-center text-white">
             <div class="card-body">
               <i class="fa fa-coffee"></i>
-              <h3>Lorem ipsum</h3>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, architecto.
+              <h3>Democracy</h3>
+              Raise your voice. Your are indifferent part of the country.
             </div>
           </div>
         </div>
@@ -134,26 +142,26 @@
   <!-- TESTIMONIALS -->
   <section id="testimonial-section" class="p-4 bg-dark text-white">
     <div class="container">
-      <h2 class="text-center">Testimonials</h2>
+      <h2 class="text-center">Some quotes on Democracy</h2>
       <div class="row">
         <div class="col">
           <div class="slider">
             <div>
               <blockquote class="blockquote">
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, sunt!</p>
-                <footer class="blockquote-footer">John Doe From <cite title="Company 1">Company 1</cite></footer>
+                <p class="mb-0">What is really need to make democracy function is not knowledge of facts, but right education.</p>
+                <footer class="blockquote-footer">Mahatma Gandhi<cite title="Company 1">(Quote 1)</cite></footer>
               </blockquote>
             </div>
             <div>
               <blockquote class="blockquote">
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, sunt!</p>
-                <footer class="blockquote-footer">Steve Smith From <cite title="Company 2">Company 2</cite></footer>
+                <p class="mb-0">Democracy is the worst from of government except for all the others.</p>
+                <footer class="blockquote-footer">Winston Churchill<cite title="Company 2">(Quote 2)</cite></footer>
               </blockquote>
             </div>
             <div>
               <blockquote class="blockquote">
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, sunt!</p>
-                <footer class="blockquote-footer">Megan Williams From <cite title="Company 3">Company 3</cite></footer>
+                <p class="mb-0">The best argument against Democracy is a five-minute conversation with the average voter.</p>
+                <footer class="blockquote-footer">Winston Churchill<cite title="Company 3">(Quote 3)</cite></footer>
               </blockquote>
             </div>
           </div>
@@ -167,7 +175,7 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <p>Copyright 2017 &copy; Glozzom</p>
+          <p>Copyright 2017 &copy; Democracy</p>
         </div>
       </div>
     </div>

@@ -1,9 +1,8 @@
-from django.shortcuts import render, HttpResponse, redirect, render_to_response
+from django.shortcuts import render, HttpResponse, redirect
 from .forms import customuserform
-from .models import UserVote, Opinion, CodeVote, Custom_User_Model
+from .models import UserVote, Opinion, CodeVote
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
 
 
 def home(request):
@@ -22,14 +21,6 @@ def aboutus(request):
     return render(request, 'Democracy/about.html')
 
 
-def Services(request):
-    return render(request, 'Democracy/services.html')
-
-
-def blog(request):
-    return render(request, 'Democracy/blog.html')
-
-
 def contact(request):
     return render(request, 'Democracy/contact.html')
 
@@ -45,8 +36,9 @@ def registerview(request):
             form.save()
             return redirect('Signin')
         else:
-            return HttpResponse("!!Invalid Credential!!<br>"
-                                "your password can't be too similar to your other personal information.")
+            return render(request, 'Democracy/signup.html', {'message': 'Invalid Credential!!. '
+                                                                        'Your UID should be a valid Aadhar Number!. '
+                                                                        'Password should be of min 8 characters and not similar to any other credential!'})
 
 
 def loginview(request):
@@ -59,7 +51,7 @@ def loginview(request):
             return redirect('Home')
 
         else:
-            return HttpResponse("Sorry! Your account in Permanentaly Disabled.")
+            return HttpResponse("Sorry! Your account is Permanently Dishabled.")
     else:
         return render(request, 'Democracy/signin.html', {'message': 'Invalid Username or password'})
 
@@ -67,9 +59,10 @@ def loginview(request):
 
 @login_required
 def logoutview(request):
-    if request.method == 'POST':
-        logout(request)
-        redirect('Home')
+    logout(request)
+    print(request.user)
+    return redirect('Home')
+
 
 
 def save_response(request):
@@ -137,6 +130,6 @@ def vote_count():
             elif(obj.Do_Not_Know == True):
                 codevote.do_not_know+=1
         codevote.save()
-
+vote_count()
 
 

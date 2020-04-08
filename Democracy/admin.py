@@ -5,5 +5,3 @@ admin.site.register(Custom_User_Model)
 admin.site.register(UserVote)
 admin.site.register(Opinion)
 admin.site.register(CodeVote)
-'''admin.site.register(Vote)
-admin.site.register(Laws)'''

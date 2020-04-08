@@ -15,23 +15,31 @@
 <body>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container">
-      <a href="{% url 'Index' %}" class="navbar-brand">Glozzom</a>
+      <a href="" class="navbar-brand">Democracy</a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navNavbar"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a href="{% url 'Index' %}" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'About' %}" class="nav-link">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'Services' %}" class="nav-link">Services</a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'Blog' %}" class="nav-link">Blog</a>
-          </li>
+         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
+            <a href="{% url 'Home' %}" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'About'%}" class="nav-link">About Us</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a href=" {% url 'Logout' %} " class="nav-link">Log Out</a>
+          </li>
+          {% else %}
+            <li class="nav-item">
+              <a href=" {% url 'Signin' %} " class="nav-link">&nbsp;&nbsp;&nbsp;&nbsp;Sign IN</a>
+              <p><font color="white">(Already a User?)&nbsp;&nbsp;</font></p>
+          </li>
+          <li class="nav-item">
+            <a href=" {% url 'Signup' %} " class="nav-link">Sign UP</a>
+            <p><font color="white">(New User?)</font></p>
+          </li>
+          {% endif %}
+          <li class="nav-item">
             <a href="{% url 'Contact' %}" class="nav-link">Contact</a>
           </li>
         </ul>
@@ -44,7 +52,7 @@
       <div class="row">
         <div class="col-md-6 m-auto text-center">
           <h1>Contact Us</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, saepe.</p>
+          <p>If you have any query then please contact us.</p>
         </div>
       </div>
     </div>
@@ -58,9 +66,9 @@
           <div class="card p-4">
             <div class="card-body">
               <h4>Get In Touch</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p>Want to join us then contact through the following informations.</p>
               <h4>Address</h4>
-              <p>550 Main st Boston MA</p>
+              <p>Anand Vihar, New Delhi</p>
               <h4>Email</h4>
               <p>test@test.com</p>
               <h4>Phone</h4>
@@ -115,30 +123,6 @@
   <!-- STAFF SECTION -->
   <section id="staff" class="py-5 text-center bg-dark text-white">
     <div class="container">
-      <h1>Our Staff</h1>
-      <hr>
-      <div class="row">
-        <div class="col-md-3">
-          <img src="/static/img/person1.jpg" alt="" class="img-fluid rounded-circle mb-2">
-          <h4>Jane Doe</h4>
-          <small>Marketing Manager</small>
-        </div>
-        <div class="col-md-3">
-          <img src="/static/img/person2.jpg" alt="" class="img-fluid rounded-circle mb-2">
-          <h4>Sara Williams</h4>
-          <small>Business Manager</small>
-        </div>
-        <div class="col-md-3">
-          <img src="/static/img/person3.jpg" alt="" class="img-fluid rounded-circle mb-2">
-          <h4>John Doe</h4>
-          <small>CEO</small>
-        </div>
-        <div class="col-md-3">
-          <img src="/static/img/person4.jpg" alt="" class="img-fluid rounded-circle mb-2">
-          <h4>Steve Smith</h4>
-          <small>Web Developer</small>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -147,7 +131,7 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <p>Copyright 2017 &copy; Glozzom</p>
+          <p>Copyright 2017 &copy; Democracy</p>
         </div>
       </div>
     </div>
