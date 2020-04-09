@@ -69,7 +69,7 @@ def save_response(request):
         code_id = request.POST['bills']
 
         user_opinion = request.POST['opinion']
-        comment = request.POST['comment']
+        user_comment = request.POST.get('comment')
         check_list = Opinion.objects.filter(username=request.user)
 
         flag = 0
@@ -89,7 +89,7 @@ def save_response(request):
             uservote.username = request.user
             opinion.code_id = code_id
 
-            opinion.comment = str(comment)
+            opinion.comment = user_comment
 
             if (user_opinion == 'True'):
                 opinion.Yes = True
