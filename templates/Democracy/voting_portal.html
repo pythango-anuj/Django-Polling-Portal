@@ -1,3 +1,5 @@
+<!Doctype html>
+{% load static %}
 <html>
 <head>
     <title>Voting pool</title>
@@ -54,11 +56,11 @@ li{
 
 <div id="navbar">
     <ul>
-        <li><a id="link1" href="#">MY PROFILE</a></li>
-        <li><a id="link1" href="home_page.php"> HOME</a></li>
-        <li><a id="link1" href="order.php">MY ORDERS</a></li>
-
-        <li><a id="link1" href="user_logout.php">LOGOUT</a></li>
+        <li><a id="link1" href="{% url 'Home' %}">HOME</a></li>
+        <li><a id="link1" href="{% url 'About' %}">ABOUT US</a></li>
+        <li><a id="link1" href="{% url 'Contact' %}">CONTACT</a></li>
+        <li><a id="link1" href="{% url 'Logout' %}">LOGOUT</a></li>
+        <li><a id="link1" href="{% url 'History' %}">HISTORY</a></li>
     </ul>
 </div>
 

@@ -83,7 +83,15 @@
                  It amended the Citizenship Act of 1955 by providing a path to
                   Indian citizenship for members of Hindu, ...<a href="https://en.wikipedia.org/wiki/Citizenship_Amendment_Act_protests">more</a></p>
               {% if user.is_authenticated %}
-              <a href="{% url 'Voting' %}" class="btn btn-success btn-lg">Vote Now</a>
+              <table>
+                <tr>
+                <td><a href="{% url 'Voting' %}" class="btn btn-success btn-lg">Vote Now</a></td>
+              <td><form action="{% url 'Result' %}" method="post">
+                {% csrf_token %}
+                <button type="submit"  style="height:48px;"  class="btn btn-warning" name="bill" value="CAA">CAA Poll Result</button>
+              </form>
+              </td></tr>
+              </table>
               {% endif %}
             </div>
           </div>
@@ -99,7 +107,15 @@
                   citizens in the state of Assam.The register was specifically made for Assam.
                 <a href="https://en.wikipedia.org/wiki/National_Register_of_Citizens">read more</a></p>
               {% if user.is_authenticated %}
-              <a href="{% url 'Voting' %}" class="btn btn-success btn-lg">Vote Now</a>
+              <table>
+                <tr>
+                <td><a href="{% url 'Voting' %}" class="btn btn-success btn-lg">Vote Now</a></td>
+              <td><form action="{% url 'Result' %}" method="post">
+                {% csrf_token %}
+                <button type="submit"  style="height:48px;"  class="btn btn-warning" name="bill" value="NRC">NRC Poll Result</button>
+              </form>
+              </td></tr>
+              </table>
               {% endif %}
             </div>
           </div>
@@ -108,14 +124,22 @@
         <div class="carousel-item carousel-image-2">
           <div class="container">
             <div class="carousel-caption d-none d-sm-block  text-left mb-5">
-              <h2 class="display-3"><a class="text-light"style="text-decoration:none;" href="">21 Day Lockdown</a></h2>
+              <h2 class="display-3"><a class="text-light"style="text-decoration:none;" href="">21 Day Lockdown(LD)</a></h2>
               <p class="lead">The 21 day Lockdown in  India taken place from 25th March to 14th April
                 is the largest lockdown of the world till now. It is a forced lockdown due to
                 the bursting of Corona Virus through out the world and till now it is
                 the only method to stop the spreading of Corona virus.
                 <a href="https://en.wikipedia.org/wiki/Citizenship_Amendment_Act_protests">more</a></p>
               {% if user.is_authenticated %}
-              <a href="{% url 'Voting' %}" class="btn btn-success btn-lg">Vote Now</a>
+              <table>
+                <tr>
+                <td><a href="{% url 'Voting' %}" class="btn btn-success btn-lg">Vote Now</a></td>
+              <td><form action="{% url 'Result' %}" method="post">
+                {% csrf_token %}
+                <button type="submit"  style="height:48px;"  class="btn btn-warning" name="bill" value="LD">LD Poll Result</button>
+              </form>
+              </td></tr>
+              </table>
               {% endif %}
             </div>
           </div>

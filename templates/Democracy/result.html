@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en-US">
+<style>
+  body{
+  background-image: url("{% static 'img/background_election.jpg' %}");
+  background-size: 100%;
+                }
+</style>
+<body>
+
+<h1><font  color="red"><i>{{ count.code_id }} Poll Result:</i></font></h1>
+<div id="piechart" style="boredr-radius:10px;"></div>
+<br>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Support', {{ count.yes }}],
+  ['Against', {{ count.no }}],
+  ["Can't Say", {{ count.do_not_know }}],
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'Pie Chart Of Above Poll Result:', 'width':1000, 'height':500};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+</script>
+</div>
+</body>
+</html>

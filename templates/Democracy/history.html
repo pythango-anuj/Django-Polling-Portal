@@ -1,0 +1,120 @@
+<!Doctype html>
+{% load static %}
+<html>
+<head>
+    <title>Voting pool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <style>
+#navbar{
+  padding: 30px;
+  background: black;
+
+}
+#container{
+  padding: 30px;
+  width:50%;
+  align:center;
+  margin-top: 50px;
+}
+footer#main-footer {
+  margin-top: 10%;
+  padding:20px;
+  height:60px;
+  background: #000;
+  color: #fff; }
+li{
+  float:left;
+  margin-left:50px;
+  list-style-type:none;
+  color:white;
+}
+#link1{
+  text-decoration: none;
+  font-family: tahoma;
+  color:white;
+}
+#link1 :hover{
+  color:grey;
+}
+#hdd2{
+  background: #383550;
+  color:orange;
+  padding:20px;
+}
+#container{
+  border:1px;
+}
+
+    </style>
+</head>
+<body>
+
+<div id="navbar">
+    <ul>
+        <li><a id="link1" href="{% url 'Home' %}">HOME</a></li>
+        <li><a id="link1" href="{% url 'About' %}">ABOUT US</a></li>
+        <li><a id="link1" href="{% url 'Contact' %}">CONTACT</a></li>
+        <li><a id="link1" href="{% url 'Logout' %}">LOGOUT</a></li>
+        <li><a id="link1" href="{% url 'History' %}">HISTORY</a></li>
+    </ul>
+</div>
+
+
+<div class="container bg-light text-danger" align="center" id="container">
+    <h2 id="voting" align=center class="bg-dark text-light">Your Previous Vote Details</h2>
+    {% if vote_list %}
+        <table>
+            <tr>
+                <th>
+                    <h3><u><b><font>BILL\LAW NAME</font></b></u></h3>
+                </th>
+                <th>
+                    <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+                </th>
+                </th>
+                <th>
+                    <h3><u><b><font>YOUR OPINION</font></b></u></h3>
+                </th>
+            </tr>
+        {% for item in vote_list %}
+            <tr>
+                <td>
+                    <p><font color="skyblue" size="5px">{{ item.code_id }}</font></p>
+                </td>
+                <th>
+                    <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+                </th>
+                <th>
+                    {% if item.Yes %}
+                    <p><font color="skyblue" size="5px">Supporting it.</font></p>
+                    {% elif item.No %}
+                    <p><font color="skyblue" size="5px">Against it.</font></p>
+                    {% elif item.Do_Not_Know %}
+                    <p><font color="skyblue" size="5px">In neither favour.</font></p>
+                    {% endif %}
+                </th>
+            </tr><br>
+        {% endfor %}
+        </table>
+    {% else %}
+    <p><font>Sorry! You have not voted yet for any bill.</font></p>
+    {% endif %}
+</div>
+
+<br><br><br><br><br><br><br><br><br>
+<footer id="main-footer" class="text-center p-4">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>Copyright 2019 &copy; DEMOCRACY</p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

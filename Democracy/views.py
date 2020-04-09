@@ -24,6 +24,7 @@ def aboutus(request):
 def contact(request):
     return render(request, 'Democracy/contact.html')
 
+
 @login_required
 def voting(request):
     return render(request, 'Democracy/voting_portal.html')
@@ -56,13 +57,11 @@ def loginview(request):
         return render(request, 'Democracy/signin.html', {'message': 'Invalid Username or password'})
 
 
-
 @login_required
 def logoutview(request):
     logout(request)
     print(request.user)
     return redirect('Home')
-
 
 
 def save_response(request):
@@ -90,7 +89,7 @@ def save_response(request):
             uservote.username = request.user
             opinion.code_id = code_id
 
-            opinion.comment = comment
+            opinion.comment = str(comment)
 
             if (user_opinion == 'True'):
                 opinion.Yes = True
@@ -109,27 +108,40 @@ def save_response(request):
             vote_count()
             return render(request, 'Democracy/voting_portal.html', {'message': "Thanks for giving your response!"})
 
+
 def vote_count():
     CodeVote.objects.all().delete()
-    sets=set()
-    bills=Opinion.objects.all()
+    sets = set()
+    bills = Opinion.objects.all()
     for bill in bills:
         sets.add(bill.code_id)
     for item in sets:
         codevote = CodeVote()
         codevote.code_id = item
-        codevote.yes=0
-        codevote.no=0
-        codevote.do_not_know=0
-        vote_obj=Opinion.objects.filter(code_id=item)
+        codevote.yes = 0
+        codevote.no = 0
+        codevote.do_not_know = 0
+        vote_obj = Opinion.objects.filter(code_id=item)
         for obj in vote_obj:
-            if(obj.Yes == True):
-                codevote.yes+=1
-            elif(obj.No == True):
-                codevote.no+=1
-            elif(obj.Do_Not_Know == True):
-                codevote.do_not_know+=1
+            if (obj.Yes == True):
+                codevote.yes += 1
+            elif (obj.No == True):
+                codevote.no += 1
+            elif (obj.Do_Not_Know == True):
+                codevote.do_not_know += 1
         codevote.save()
+
+
 vote_count()
 
 
+def history(request):
+    vote_list = UserVote.objects.filter(username=request.user)
+    return render(request, 'Democracy/history.html', context={'vote_list': vote_list})
+
+
+def result(request):
+    if request.method == "POST":
+        bill = request.POST['bill']
+        count = CodeVote.objects.get(code_id=bill)
+    return render(request, 'Democracy/result.html', context={'count': count})
